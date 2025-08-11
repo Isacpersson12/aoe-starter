@@ -1,13 +1,17 @@
 export default function(eleventyConfig) {
-  eleventyConfig.addCollection("opps", (collectionApi) =>
-    collectionApi.getFilteredByGlob("src/opps/*.md").sort((a,b)=>{
-      const da = (a.data.deadline||"").toString();
-      const db = (b.data.deadline||"").toString();
-      return da.localeCompare(db);
-    })
-  );
+  // Robust collection: "anything in src/opps/"
+  eleventyConfig.addCollection("opps", (coll) => {
+    const items = coll.getAll().filter(i =>
+      i.inputPath.includes("/opps/") && i.inputPath.endsWith(".md")
+    );
+    // sort by deadline if present
+    return items.sort((a,b) =>
+      String(a.data.deadline || "").localeCompare(String(b.data.deadline || ""))
+    );
+  });
+
   return {
-    dir: { input: "src", output: "_site" },
+    dir: { input: "src", output: "_site" }, // _includes defaults to "src/_includes"
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk"
   };
