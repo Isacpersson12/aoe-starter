@@ -1,25 +1,35 @@
-
 name: daily-build
 on:
   schedule:
-    - cron: '23 5 * * *' # daily 05:23 CET
+    - cron: '23 5 * * *'   # runs every morning CET
   workflow_dispatch:
+
+permissions:
+  contents: write   # <-- lets the bot commit & push
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
-      - run: npm ci || npm i
-      - run: npm run fetch
-      - run: npm run build
-      - name: Commit & push changes
+          node-version: 20
+      - run: npm install --no-fund --no-audit
+      # Pull feeds -> write markdown files (never fail the job on bad feeds)
+      - name: Fetch RSS
+        run: node scripts/fetch_rss.mjs || true
+      # Optional: build to catch template errors early
+      - name: Build site
+        run: npx @11ty/eleventy --input=src --output=_site --formats=njk,md,html
+      # Commit any new/updated files
+      - name: Commit & push
         run: |
           git config user.name "aoe-bot"
           git config user.email "aoe-bot@users.noreply.github.com"
           git add -A
-          git commit -m "auto: update" || echo "nothing to commit"
+          git commit -m "auto: update" || echo "no changes"
+          git pull --rebase
           git push
