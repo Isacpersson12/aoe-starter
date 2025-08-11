@@ -1,11 +1,9 @@
 export default function(eleventyConfig) {
-  // Collect EVERY markdown file under src/opps (recursively)
   eleventyConfig.addCollection("opps", (api) =>
-    api.getFilteredByGlob("src/opps/**/*.md")
+    api.getFilteredByGlob("opps/**/*.md")   // <-- key fix
   );
-
   return {
-    dir: { input: "src", output: "_site" }, // layouts in src/_includes
+    dir: { input: "src", output: "_site" },
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk"
   };
