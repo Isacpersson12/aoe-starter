@@ -1,14 +1,16 @@
-
 ---
 layout: layouts/base.njk
 title: All Opportunities
 ---
+
 <h1>All Opportunities</h1>
 <ul>
   {% for item in collections.opps %}
-  <li>
-    <a href="{{ item.url }}">{{ item.data.title }}</a>
-    <small> ({{ item.data.country }} • {{ item.data.discipline }}{% if item.data.deadline %} • deadline: {{ item.data.deadline }}{% endif %})</small>
-  </li>
+    <li>
+      <a href="{{ item.url }}">{{ item.data.title }}</a>
+      <small>
+        ({{ item.data.country }} • {{ item.data.discipline }}{% if item.data.deadline %} • deadline: {{ item.data.deadline }}{% endif %})
+      </small>
+    </li>
   {% endfor %}
 </ul>
