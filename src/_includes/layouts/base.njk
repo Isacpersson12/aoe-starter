@@ -6,7 +6,13 @@
   <title>{{ title | default('AOE') }}</title>
   <style>
     body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.6;margin:2rem auto;max-width:800px;padding:0 1rem}
-    nav a{margin-right:.75rem}
+    <nav>
+  <a href="{{ site.base }}/">Home</a>
+  <a href="{{ site.base }}/opportunities/">All</a>
+  <a href="{{ site.base }}/submit/">Submit</a>
+  <a href="{{ site.base }}/pro/">Pro</a>
+  <a href="{{ site.base }}/subscribe/">Subscribe</a>
+</nav>
   </style>
 </head>
 <body>
