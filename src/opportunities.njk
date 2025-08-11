@@ -5,11 +5,7 @@ title: All Opportunities
 
 <h1>All Opportunities</h1>
 
-{% set opps = collections.all
-  | selectattr("url", "defined")
-  | selectattr("url", "search", "/opps/")
-%}
-
+{% set opps = collections.opp %}
 <p>Total: {{ opps | length }}</p>
 
 <ul>
