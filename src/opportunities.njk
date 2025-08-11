@@ -5,24 +5,11 @@ title: All Opportunities
 
 <h1>All Opportunities</h1>
 
-{# count items first #}
-{% set total = 0 %}
-{% for item in collections.all %}
-  {% if item.url and item.url.indexOf('/opps/') != -1 %}
-    {% set total = total + 1 %}
-  {% endif %}
-{% endfor %}
-
-<p>Total: {{ total }}</p>
-
 <ul>
 {% for item in collections.all %}
-  {% if item.url and item.url.indexOf('/opps/') != -1 %}
+  {% if item.url and (item.url.indexOf('/opps/') != -1) %}
     <li>
-      <a href="{{ item.url }}">{{ item.data.title }}</a>
-      <small>
-        ({{ item.data.country }} · {{ item.data.discipline }}{% if item.data.deadline %} · deadline: {{ item.data.deadline }}{% endif %})
-      </small>
+      <a href="{{ item.url }}">{{ item.data.title or item.fileSlug }}</a>
     </li>
   {% endif %}
 {% endfor %}
