@@ -9,7 +9,7 @@ title: All Opportunities
 {% for item in collections.all %}
   {% if item.url and (item.url.indexOf('/opps/') != -1) %}
     <li>
-      <a href="{{ item.url | url }}">{{ item.data.title }}</a>
+     <a href="{{ site.base }}{{ item.url }}">{{ item.data.title }}</a>
     </li>
   {% endif %}
 {% endfor %}
