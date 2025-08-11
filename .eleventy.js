@@ -1,5 +1,4 @@
-
-module.exports = function(eleventyConfig) {
+export default function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy({"public": "/"});
   eleventyConfig.addCollection("opps", function(collectionApi) {
     return collectionApi.getFilteredByGlob("src/opps/*.md").sort((a,b)=>{
@@ -13,4 +12,4 @@ module.exports = function(eleventyConfig) {
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk"
   };
-};
+}
