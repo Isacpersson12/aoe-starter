@@ -1,7 +1,7 @@
 name: Deploy site to GitHub Pages
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -14,21 +14,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: 
-        run: |      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - run: npm install --no-fund --no-audit
-      - run: npx @11ty/eleventy --input=src --output=_site --formats=njk,md,html --quiet=false --verbose
+      - name: Make a simple site (test Pages)
+        run: |
           mkdir -p _site
-          cat > _site/index.html << 'HTML'
-          <!doctype html>
-          <meta charset="utf-8">
-          <title>AOE is live ✅</title>
-          <h1>AOE is live ✅</h1>
-          <p>If you see this, GitHub Pages is working.</p>
-          <p>Next: we’ll turn Eleventy back on.</p>
-          HTML
+          printf '%s\n' \
+            '<!doctype html>' \
+            '<meta charset="utf-8">' \
+            '<title>AOE is live ✅</title>' \
+            '<h1>AOE is live ✅</h1>' \
+            '<p>If you see this, GitHub Pages is working.</p>' \
+            > _site/index.html
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
