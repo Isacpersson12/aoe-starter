@@ -1,0 +1,7 @@
+Category,Planned,Actual,Notes
+Personnel,0,0,
+Travel,0,0,
+Equipment,0,0,
+Marketing,0,0,
+Overheads,0,0,
+Total,=SUM(B2:B6),=SUM(C2:C6),

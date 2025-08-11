@@ -1,0 +1,17 @@
+
+# Add 5–10 real RSS/Atom feeds here. Use:
+# - Google: site:gov site:.eu site:.se (or your country) + "rss" + "grants" + "open calls"
+# - Many ministries/arts councils have "news" or "open calls" feeds.
+# - If a page has an orange RSS icon or "Subscribe" → copy the feed URL.
+#
+# Example entries:
+- name: "Example EU Culture Feed"
+  url: "https://example.org/rss.xml"     # Replace with a real feed URL
+  country: "EU"
+  discipline: "Mixed"
+  deadline_regex: "(?i)deadline:?\s*(\d{4}-\d{2}-\d{2}|\d{1,2}\s\w+\s\d{4})"
+- name: "Example National Arts Council"
+  url: "https://example.gov/open-calls/rss"
+  country: "SE"
+  discipline: "Music"
+  deadline_regex: "(?i)deadline:?\s*(\d{1,2}\s\w+\s\d{4})"

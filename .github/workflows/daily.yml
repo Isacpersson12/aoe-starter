@@ -1,0 +1,25 @@
+
+name: daily-build
+on:
+  schedule:
+    - cron: '23 5 * * *' # daily 05:23 CET
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci || npm i
+      - run: npm run fetch
+      - run: npm run build
+      - name: Commit & push changes
+        run: |
+          git config user.name "aoe-bot"
+          git config user.email "aoe-bot@users.noreply.github.com"
+          git add -A
+          git commit -m "auto: update" || echo "nothing to commit"
+          git push
