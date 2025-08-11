@@ -4,7 +4,7 @@ title: All Opportunities
 ---
 
 <h1>All Opportunities</h1>
-<ul>
+<p>Total: {{ collections.opps | length }}</p>
   {% for item in collections.opps %}
     <li>
       <a href="{{ item.url }}">{{ item.data.title }}</a>
