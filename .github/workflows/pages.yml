@@ -14,14 +14,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      # Install deps cleanly
-      - run: npm install --no-fund --no-audit
-      # Build the site with Eleventy (outputs to _site)
-      - run: npx @11ty/eleventy
-      # Upload the _site folder for Pages to publish
+      - name: Make a simple site (skip Eleventy for now)
+        run: |
+          mkdir -p _site
+          cat > _site/index.html << 'HTML'
+          <!doctype html>
+          <meta charset="utf-8">
+          <title>AOE is live ✅</title>
+          <h1>AOE is live ✅</h1>
+          <p>If you see this, GitHub Pages is working.</p>
+          <p>Next: we’ll turn Eleventy back on.</p>
+          HTML
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
