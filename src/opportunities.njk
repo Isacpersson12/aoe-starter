@@ -4,15 +4,20 @@ title: All Opportunities
 ---
 
 <h1>All Opportunities</h1>
+
+{% set opps = collections.all
+  | selectattr("inputPath", "defined")
+  | selectattr("inputPath", "search", "opps/") %}
+
+<p>Total: {{ opps | length }}</p>
+
 <ul>
-{% for item in collections.all %}
-  {% if item.inputPath and item.inputPath.indexOf('/opps/') != -1 %}
+  {% for item in opps %}
     <li>
       <a href="{{ item.url }}">{{ item.data.title }}</a>
       <small>
         ({{ item.data.country }} • {{ item.data.discipline }}{% if item.data.deadline %} • deadline: {{ item.data.deadline }}{% endif %})
       </small>
     </li>
-  {% endif %}
-{% endfor %}
+  {% endfor %}
 </ul>
