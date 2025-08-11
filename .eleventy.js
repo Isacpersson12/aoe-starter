@@ -6,13 +6,8 @@ export default function(eleventyConfig) {
       return da.localeCompare(db);
     })
   );
-
   return {
-    dir: {
-      input: "src",
-      output: "_site",
-      includes: "layouts"   // <— tell 11ty that layouts live in src/layouts
-    },
+    dir: { input: "src", output: "_site" },
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk"
   };
