@@ -4,10 +4,16 @@ title: All Opportunities
 ---
 
 <h1>All Opportunities</h1>
-<p>Total: {{ collections.opps | length }}</p>
+
+{% set opps = collections.all
+  | selectattr("inputPath", "defined")
+  | selectattr("inputPath", "search", "/src/opps/")
+%}
+
+<p>Total: {{ opps | length }}</p>
 
 <ul>
-  {% for item in collections.opps %}
+  {% for item in opps %}
     <li>
       <a href="{{ item.url }}">{{ item.data.title }}</a>
       <small>
