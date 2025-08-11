@@ -14,16 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Make a simple site (test Pages)
-        run: |
-          mkdir -p _site
-          printf '%s\n' \
-            '<!doctype html>' \
-            '<meta charset="utf-8">' \
-            '<title>AOE is live ✅</title>' \
-            '<h1>AOE is live ✅</h1>' \
-            '<p>If you see this, GitHub Pages is working.</p>' \
-            > _site/index.html
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install --no-fund --no-audit
+      - name: Build with Eleventy
+        run: npx @11ty/eleventy --input=src --output=_site --formats=njk,md,html
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
