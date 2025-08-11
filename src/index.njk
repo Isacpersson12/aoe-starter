@@ -4,24 +4,7 @@ title: Home
 permalink: index.html
 ---
 
-
-<div class="home">
-  <h1>EU Grants & Open Calls — Daily Updated</h1>
-  <p>Find artist/creator/entrepreneur grants, contests, residencies. Updated automatically from verified sources.</p>
-
-  <form action="/subscribe" method="get">
-    <button>Get weekly digest (free)</button>
-  </form>
-
-  <h2>Latest opportunities</h2>
-  <ul>
-  {% for item in collections.opps | reverse %}
-    <li>
-      <a href="{{ item.url }}">{{ item.data.title }}</a>
-      {% if item.data.deadline %} — deadline: {{ item.data.deadline }}{% endif %}
-      <small> [{{ item.data.country }} • {{ item.data.discipline }}]</small>
-    </li>
-  {% endfor %}
-  </ul>
+<h1>EU Grants & Open Calls — Daily Updated</h1>
+<p>Find artist/creator/entrepreneur grants, contests, residencies.</p>
 
 <p><a href="opportunities/">Browse all</a> • <a href="submit/">Submit an opportunity</a> • <a href="pro/">Pro Access</a></p>
