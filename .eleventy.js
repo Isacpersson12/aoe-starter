@@ -1,5 +1,5 @@
 export default function(eleventyConfig) {
-  eleventyConfig.addPassthroughCopy({"public": "/"});
+  // no passthrough for now to avoid index.html collisions
   eleventyConfig.addCollection("opps", (collectionApi) =>
     collectionApi.getFilteredByGlob("src/opps/*.md").sort((a,b)=>{
       const da = (a.data.deadline||"").toString();
