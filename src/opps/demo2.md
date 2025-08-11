@@ -1,4 +1,5 @@
 ---
+layout: layouts/base.njk
 title: "Demo Grant 2"
 country: "EU"
 discipline: "Music"
