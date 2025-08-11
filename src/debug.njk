@@ -1,0 +1,9 @@
+---
+permalink: debug/index.html
+---
+<h1>Debug</h1>
+<p>Total in opps: {{ collections.opps | length }}</p>
+<pre>
+{% for i in collections.opps %}{{ i.inputPath }}
+{% endfor %}
+</pre>
