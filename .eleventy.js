@@ -1,11 +1,9 @@
 export default function(eleventyConfig) {
-  // Grab every Markdown file in src/opps/
-  eleventyConfig.addCollection("opps", (api) =>
-    api.getFilteredByGlob("src/opps/*.md")
-  );
+  // All items with the "opp" tag (set automatically by src/opps/opps.json)
+  eleventyConfig.addCollection("opps", (api) => api.getFilteredByTag("opp"));
 
   return {
-    dir: { input: "src", output: "_site" }, // layouts are already in src/_includes/
+    dir: { input: "src", output: "_site" }, // layouts live in src/_includes
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk"
   };
