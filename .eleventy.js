@@ -1,10 +1,14 @@
 export default function(eleventyConfig) {
-  // Collect ONLY markdown files in src/opps, and sort by deadline (if any)
-  eleventyConfig.addCollection("opps", (api) =>
-    api.getFilteredByGlob("opps/**/*.md")
-       .filter(i => i.data && i.data.title) // ignore pages without a title
-       .sort((a,b) => String(a.data.deadline||"").localeCompare(String(b.data.deadline||"")))
-  );
+  // Collect ANY markdown that lives under src/opps (robust on CI paths)
+  eleventyConfig.addCollection("opps", (api) => {
+    return api.getAll().filter(i =>
+      i.inputPath &&
+      i.inputPath.endsWith(".md") &&
+      (i.inputPath.includes("/src/opps/") || i.inputPath.includes("\\src\\opps\\"))
+    ).sort((a,b) =>
+      String(a.data?.deadline || "").localeCompare(String(b.data?.deadline || ""))
+    );
+  });
 
   return {
     dir: { input: "src", output: "_site" },
