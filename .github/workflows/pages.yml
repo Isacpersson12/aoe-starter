@@ -14,8 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Make a simple site (skip Eleventy for now)
-        run: |
+      - name: 
+        run: |      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install --no-fund --no-audit
+      - run: npx @11ty/eleventy --input=src --output=_site --formats=njk,md,html --quiet=false --verbose
           mkdir -p _site
           cat > _site/index.html << 'HTML'
           <!doctype html>
