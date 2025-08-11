@@ -9,10 +9,6 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,12 +16,16 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
-      - run: npm ci || npm i
-      - run: npm run build
+          node-version: 20
+      # Install deps cleanly
+      - run: npm install --no-fund --no-audit
+      # Build the site with Eleventy (outputs to _site)
+      - run: npx @11ty/eleventy
+      # Upload the _site folder for Pages to publish
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
