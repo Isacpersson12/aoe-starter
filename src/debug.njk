@@ -1,8 +1,20 @@
 ---
 permalink: debug/index.html
+layout: layouts/base.njk
+title: Debug
 ---
 <h1>Debug</h1>
-<p>Total in opps: {{ collections.opps | length }}</p>
+
+<p><b>collections.all count:</b> {{ collections.all | length }}</p>
+<p><b>collections.opps count:</b> {{ collections.opps | length }}</p>
+
+<h3>All templates</h3>
+<pre>
+{% for i in collections.all %}{{ i.inputPath }}
+{% endfor %}
+</pre>
+
+<h3>Opps via collection</h3>
 <pre>
 {% for i in collections.opps %}{{ i.inputPath }}
 {% endfor %}
